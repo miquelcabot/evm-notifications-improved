@@ -590,8 +590,8 @@ contract ConfidentialMultipartyRegisteredEDeliveryWithoutTTP {
             PP
         );
         (xAdd, yAdd) = Grx.ecAdd(Gry, Bcx, Bcy, AA, PP);
-        require(vx!= xAdd, "V and Gx[ri]+Bix[ci] are not equals");
-        require(vy != yAdd, "V and Gx[ri]+Bix[ci] are not equals");
+        require(vx == xAdd, "V and Gx[ri]+Bix[ci] are not equals");
+        require(vy == yAdd, "V and Gx[ri]+Bix[ci] are not equals");
         
         msg.sender.transfer(address(this).balance); // Sender receives the refund of the deposit
         // We set the state of every receiver with 'accepted' state to 'finished'
