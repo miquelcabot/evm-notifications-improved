@@ -17,7 +17,7 @@ const compiledFactory = require(compiledFactoryPath);
 const compiledDelivery = require(compiledDeliveryPath);*/
 
 const ipfsAPI = require('ipfs-api');
-const ipfs = ipfsAPI('ipfs.infura.io', '5001', { protocol: 'https' })
+const ipfs = ipfsAPI(process.env.IPFS_HOST || 'ipfs.infura.io', process.env.IPFS_PORT || '5001', { protocol: process.env.IPFS_PROTOCOL || 'https' })
 
 describe('ConfidentialMultipartyRegisteredEDeliveryWithoutTTP', () => {
     let factoryContract;
@@ -190,10 +190,8 @@ describe('ConfidentialMultipartyRegisteredEDeliveryWithoutTTP', () => {
             "0x" + c.toString('hex'));
         await deliveryContract.connect(addr10).accept("0x" + Z1encode, formatBigIntToHex(Z2), formatBigIntToHex(B.getX()), formatBigIntToHex(B.getY()),
             "0x" + c.toString('hex'));*/
-        it("owner finish ", async function () {
-            const rstring = '0x' + r.toString(16).substr(1);
-            await deliveryContract.connect(owner).finish(addr1.address, rstring);
-        })
+        const rstring = '0x' + r.toString(16).substr(1);
+        await deliveryContract.connect(owner).finish(addr1.address, rstring);
     });
 
     /*it("received message is correct", async function() {
